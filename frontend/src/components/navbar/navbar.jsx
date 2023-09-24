@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import server from '../../../server';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './navbar.css'
 export const data =async()=>{
     const user_name = await server.get('/auth_check',{
         withCredentials: true,
@@ -27,16 +27,17 @@ export default function Navbar(){
             }).catch((e)=>{
                 console.log(e)
             })
+            console.log("ye kya hai")
             
         }
-        user()
-      return () => {
+        return () => {
+          user()
         console.log("Hello")
       }
     }, [])
     
     return (
-        <div>
+        <div className='navbar'>
         {name? <h1>{name}</h1>: <h1>login to upload the file </h1>}
         <button onClick={async ()=>{
             const logout=await server.get('/logout',{

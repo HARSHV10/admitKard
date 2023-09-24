@@ -18,17 +18,17 @@ const login=async (req,res)=>{
         console.log("cookiee",req.cookies)
     const userName=user_info.name;
     const password=user_info.pwd;
-    console.log("info user",user_info);
+    console.log("info user",userName);
     try{
-        const isauthicate = await User.find({user_name:userName}).then(async (d)=>{
-            // console.log(d[0]);
-            if(!d[0]){
+        const isauthicate = await User.findOne({user_name:userName}).then(async (d)=>{
+            console.log(d);
+            if(!d){
                 console.log("no such user")
                 res.status(404).json("no user")
             }
             else{
-                console.log("users",d[0]);
-                const check =bcrypt.compare(password, d[0].password, function(err, result) {
+                console.log("users",d);
+                const check =bcrypt.compare(password, d.password, function(err, result) {
                     if(result){
                         const token = jwt.sign(userName, secretKey);
                         // console.log("token",token);

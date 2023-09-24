@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import server from '../../../server';
-
+import './login.css'
+import { useNavigate } from 'react-router-dom';
 const loginUser = async (user,password)=>{
     const data = await  server.post('/login',{info:{
         name:user,
@@ -12,19 +13,20 @@ const loginUser = async (user,password)=>{
 }
 
 export default function login(){
-
+    const navigateTo=useNavigate();
     const [user,setUser]=useState();
     const [password,setpwd]=useState();
     return(
-        <div>
-        <input type='text' onChange={(e)=>{
+        <div className='login'>
+        <input className='input' type='text' placeholder='username' onChange={(e)=>{
             setUser(e.target.value)
         }}></input>
-        <input type='text' onChange={(e)=>{
+        <input className='input' type='text' placeholder='password' onChange={(e)=>{
             setpwd(e.target.value)
         }}></input>
-        <button onClick={()=>{
-            loginUser(user,password);
+        <button  className='input' onClick={async ()=>{
+           const data= await loginUser(user,password);
+           navigateTo('/')
         }}>submit</button>
         </div>
     )

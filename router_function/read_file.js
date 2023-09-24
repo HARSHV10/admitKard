@@ -30,7 +30,7 @@ const file_text=async (req,res)=>{
   })
   console.log("check",check);
   if(!check){
-    const data= File.findOne({},)
+    console.log("inside condition")
     const file_data = File({
       file_id:uuidv4(),
       file_name:file.originalname,
@@ -39,11 +39,12 @@ const file_text=async (req,res)=>{
     })
     await file_data.save().then((d)=>{
       console.log(d)
+      res.status(200).json(d);
     }).catch(e=>console.log(e));
-    res.status(200).json(data);
   }
   else{
-    res.status(409).json({msg:"already exist"})
+    console.log("already exist")
+    res.status(200).json(check)
   }
 }
 
