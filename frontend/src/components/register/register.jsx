@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import server from '../../../server';
+import { useNavigate } from 'react-router-dom';
+
 
 const register_user = async (user,password)=>{
     const data = await  server.post('/register',{info:{
@@ -13,16 +15,19 @@ export default function Register(){
 
     const [user,setUser]=useState();
     const [password,setpwd]=useState();
+    const navigateTo=useNavigate();
     return(
-        <div>
-        <input type='text' onChange={(e)=>{
+        <div className='login'>
+        <h1>Register</h1>
+        <input className='input' type='text' onChange={(e)=>{
             setUser(e.target.value)
         }}></input>
-        <input type='text' onChange={(e)=>{
+        <input className='input' type='text' onChange={(e)=>{
             setpwd(e.target.value)
         }}></input>
-        <button onClick={()=>{
-            register_user(user,password);
+        <button className='input' onClick={async ()=>{
+            const data = await register_user(user,password);
+            navigateTo('/')
         }}>submit</button>
         </div>
     )

@@ -50,6 +50,9 @@ export default function Navbar(){
         <button onClick={()=>{
             navigateTo('/login')
         }}>login</button>
+        <button onClick={()=>{
+            navigateTo('/register')
+        }}>Register</button>
         </div>
     )
 }

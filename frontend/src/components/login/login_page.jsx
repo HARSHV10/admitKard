@@ -18,6 +18,7 @@ export default function login(){
     const [password,setpwd]=useState();
     return(
         <div className='login'>
+        <h1>Login </h1>
         <input className='input' type='text' placeholder='username' onChange={(e)=>{
             setUser(e.target.value)
         }}></input>
